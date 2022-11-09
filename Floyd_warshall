@@ -1,0 +1,50 @@
+#include<iostream> //header file for input output.
+#include<conio.h> //header file for getch().
+using namespace std; //using standard namespace.
+int matrix[20][20],V,i,j,k; //global variables.
+void floydWarshall(int matrix[20][20],int V) //function for floyd warshall algorithm.
+{
+    for(k = 0; k < V; k++) //loop for k.
+    {
+        for(i = 0; i < V; i++) //loop for i.
+        {
+            for(j = 0; j < V; j++) //loop for j.
+            {
+                if(matrix[k][j] > 0 && matrix[i][j] > (matrix[i][k] + matrix[k][j])) //condition for checking.
+                {
+                    matrix[i][j] = matrix[i][k] + matrix[k][j]; //updating the matrix.
+                }
+            }
+        }
+    }
+
+    cout<<"Output :"<<endl; //output.
+    for(i = 0; i < V; i++) //loop for i.
+    {
+        for(j = 0; j < V; j++) //loop for j
+        {
+            cout<< matrix[i][j]<<" "; //printing the matrix
+        }
+        cout<<endl; //new line
+    }
+}
+
+int main() //main function
+{
+
+    cout<<"Floyd warshall"<<endl; //printing the name of the algorithm
+
+    cout<<"Enter number of vertices : "; //asking for number of vertices
+    cin>>V; //input for number of vertices
+    cout<<"Enter Adjacency matrix "<<endl; //asking for adjacency matrix
+    for(i = 0; i < V; i++) //loop for i
+    {
+        for(j = 0; j < V; j++) //loop for j
+        {
+            cin>>matrix[i][j]; //input for adjacency matrix
+        }
+    }
+    floydWarshall(matrix,V); //calling the function
+
+    getch(); //to stop the console from closing
+}
